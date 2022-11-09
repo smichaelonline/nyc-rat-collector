@@ -19,17 +19,19 @@
 <section class="card-container">
   {% for rat in rats %}
     <div class="card">
-      <div class="card-content">
-        <div class="card-img-container">
-          <img 
-            src="{% static 'images/favicon.png' %}" 
-            alt="placeholder"
-          >
+      <a href="{% url 'cats_detail' cat.id %}">
+        <div class="card-content">
+          <div class="card-img-container">
+            <img 
+              src="{% static 'images/favicon.png' %}" 
+              alt="placeholder"
+            >
+          </div>
+          <h2 class="card-title">{{ rat.name }}</h2>
+            <p>A {{ rat.color }} colored rat found in {{ rat.location }}</p>
+            <p>{{ rat.description }}</p>
         </div>
-        <h2 class="card-title">{{ rat.name }}</h2>
-          <p>A {{ rat.color }} colored rat found in {{ rat.location }}</p>
-          <p>{{ rat.description }}</p>
-      </div>
+      </a>
     </div>
   {% endfor %}
 </section>

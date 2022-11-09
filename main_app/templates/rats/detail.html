@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link 
+  rel="stylesheet" 
+  type="text/css" 
+  href="{% static 'css/rats/rat-detail.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+<section class="rat-container">
+  <div class="rat-img">
+    <img 
+      src="{% static 'images/sk8r-boi-cat.svg' %}" 
+      alt="A skater boy cat"
+    >
+  </div>
+  <div class="rat-details">
+    <h1>{{ rat.name }}</h1>
+    <h3>He was spotted in {{rat.location}}</h3>
+    <p>{{ rat.name }} is a {{rat.color}} colored rat.</p>
+    <p>{{ rat.description }}</p>
+  </div>
+</section>
+
+{% endblock %}

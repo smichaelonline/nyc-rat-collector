@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Rat 
 
 # Create your views here.
 def home(request):
@@ -8,18 +8,10 @@ def home(request):
 def about(request): 
   return render(request, 'about.html')
 
-class Rat: 
-  def __init__(self, name, color, description, location): 
-    self.name = name
-    self.color = color
-    self.description = description
-    self.location = location 
-
-rats = [
-  Rat('Splinter', 'black', 'Hangs out in the subway', 'Times Square'),
-  Rat('Pizza Rat', 'grey', 'found some pizza boii', '3rd Ave Subway Station'),
-  Rat('Feral Rat', 'spots', 'screams at pedestrians', 'the street'),
-]
-
 def rats_index(request): 
+  rats = Rat.objects.all()
   return render(request, 'rats/index.html', {'rats': rats })
+
+def rats_detail(request, rat_id):
+  rat = Rat.objects.get(id=rat_id)
+  return render(request, 'rats/detail.html', {'rat': rat}) 

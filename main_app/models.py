@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Rat(models.Model):
@@ -9,3 +10,6 @@ class Rat(models.Model):
 
   def __str__(self):
     return self.name
+
+  def get_absolute_url(self):
+    return reverse('rats_detail', kwargs={'rat_id': self.id})

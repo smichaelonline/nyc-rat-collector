@@ -29,8 +29,9 @@
     </div>
     <nav>
       <ul>
-        <li><a href="/about">About</a></li>
-        <li><a href="/rats">All Rats</a></li>
+        <li><a href="{%url 'about' %}">About</a></li>
+        <li><a href="{% url 'rats_create'%}">Add a Rat</a></li>
+        <li><a href="{% url 'rats_index'%}">All Rats</a></li>
       </ul>
     </nav>
   </header>

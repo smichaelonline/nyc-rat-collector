@@ -23,6 +23,12 @@
     <h3>He was spotted in {{rat.location}}</h3>
     <p>{{ rat.name }} is a {{rat.color}} colored rat.</p>
     <p>{{ rat.description }}</p>
+    <div class="rat-actions">
+      <a href="{% url 'rats_update' rat.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'rats_delete' rat.id %}" class="btn danger">Delete</a>
+    </div>
+  </div>
+</section>
   </div>
 </section>
 

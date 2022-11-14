@@ -14,6 +14,6 @@ urlpatterns = [
   path('traits/create/', views.TraitCreate.as_view(), name='traits_create'),
   path('traits/<int:pk>/', views.TraitDetail.as_view(), name='traits_detail'),
   path('traits/', views.TraitList.as_view(), name='traits_index'),
-  path('traitss/<int:pk>/update/', views.TraitUpdate.as_view(), name='traits_update'),
+  path('traits/<int:pk>/update/', views.TraitUpdate.as_view(), name='traits_update'),
   path('traits/<int:pk>/delete/', views.TraitDelete.as_view(), name='traits_delete'),
 ]

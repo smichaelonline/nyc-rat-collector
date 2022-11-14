@@ -29,7 +29,7 @@ def add_feeding(request, rat_id):
     new_feeding.save() 
   return redirect('rats_detail', rat_id=rat_id)
 
-def assoc_toy(request, rat_id, trait_id):
+def assoc_trait(request, rat_id, trait_id):
   Rat.objects.get(id=rat_id).traits.add(trait_id)
   return redirect('rats_detail', rat_id=rat_id)
 

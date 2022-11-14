@@ -16,10 +16,10 @@
 </section>
 
 <section class="card-container">
-  {% for toy in toy_list %}
+  {% for trait in trait_list %}
   <div class="card" style="border-color: {{ trait.color }}">
     <div class="card-bg" style="background-color: {{ trait.color }}"></div>
-    <a href="{% url 'trait_detail' trait.id %}">
+    <a href="{% url 'traits_detail' trait.id %}">
       <div class="card-content">
         <h2>{{ trait.name }}</h2>
         <p>A {{ trait.color }} trait</p>

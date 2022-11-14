@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Rat 
+from .forms import FeedingForm
 
 # Create your views here.
 def home(request):
@@ -15,7 +16,8 @@ def rats_index(request):
 
 def rats_detail(request, rat_id):
   rat = Rat.objects.get(id=rat_id)
-  return render(request, 'rats/detail.html', {'rat': rat}) 
+  feeding_form=FeedingForm()
+  return render(request, 'rats/detail.html', {'rat': rat, 'feeding_form': feeding_form}) 
 
 class RatCreate(CreateView):
   model = Rat 

@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/toys/toy-index.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <h1>All Rat Traits</h1>
+</section>
+
+<section class="card-container">
+  {% for toy in toy_list %}
+  <div class="card" style="border-color: {{ trait.color }}">
+    <div class="card-bg" style="background-color: {{ trait.color }}"></div>
+    <a href="{% url 'trait_detail' trait.id %}">
+      <div class="card-content">
+        <h2>{{ trait.name }}</h2>
+        <p>A {{ trait.color }} trait</p>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}

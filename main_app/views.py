@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Rat 
+from django.views.generic import ListView, DetailView
+from .models import Rat, Trait 
 from .forms import FeedingForm
 
 # Create your views here.
@@ -40,3 +41,12 @@ class RatDelete(DeleteView):
   model = Rat
   success_url= '/rats/'
 
+class TraitCreate(CreateView):
+  model = Trait
+  fields='__all__'
+
+class TraitList(ListView):
+  model = Trait
+
+class TraitDetail(DetailView):
+  model = Trait

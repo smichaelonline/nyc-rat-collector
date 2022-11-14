@@ -89,6 +89,53 @@
       </tbody>
     </table>
   </section>
+  <section class="toys">
+    <div class="subsection-title">
+      <h2>Traits</h2>
+    </div>
+    <h3>{{ rat.name }}'s Traits</h3>
+    <div class="subsection-content">
+      {% if rat.traits.count %}
+        {% for traits in rat.traits.all %}
+          <div class="toy-container">
+            <div 
+              class="color-block"
+              style="background-color: {{ trait.color }}"
+            ></div>
+            <a href="{% url 'traits_detail' trait.id %}">
+              <p>A {{ trait.name }}</p>
+            </a>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-toys">{{rat.name}} doesn't have any traits 😞</p>
+      {% endif %}
+    </div>
+    <h3>Available Traits</h3>
+    <div class="subsection-content">
+      {% if traits.count %}
+        {% for trait in traits.all %}
+          <div class="toy-container">
+            <div 
+              class="color-block"
+              style="background-color: {{ trait.color }}"
+            ></div>
+            <a href="{% url 'traits_detail' trait.id %}">
+              <p>A {{ trait.name }}</p>
+            </a>
+            <form action="{% url 'assoc_trait' rat.id trait.id %}"  method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn submit">Give trait</button>
+            </form>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="all-toys">
+          {{rat.name}} already has all the available traits
+        </p>
+      {% endif %}
+    </div>
+  </section>
 </div>
 
 {% endblock %}

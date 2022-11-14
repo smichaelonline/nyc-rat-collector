@@ -17,8 +17,9 @@ def rats_index(request):
 
 def rats_detail(request, rat_id):
   rat = Rat.objects.get(id=rat_id)
+  traits_rat_doesnt_have = Trait.objects.exclude(id__in = rat.traits.all().values_list('id'))
   feeding_form=FeedingForm()
-  return render(request, 'rats/detail.html', {'rat': rat, 'feeding_form': feeding_form}) 
+  return render(request, 'rats/detail.html', {'rat': rat, 'feeding_form': feeding_form, 'traits': traits_rat_doesnt_have}) 
 
 def add_feeding(request, rat_id):
   form = FeedingForm(request.POST)
@@ -28,9 +29,13 @@ def add_feeding(request, rat_id):
     new_feeding.save() 
   return redirect('rats_detail', rat_id=rat_id)
 
+def assoc_toy(request, rat_id, trait_id):
+  Rat.objects.get(id=rat_id).traits.add(trait_id)
+  return redirect('rats_detail', rat_id=rat_id)
+
 class RatCreate(CreateView):
   model = Rat 
-  fields = '__all__'
+  fields = ['name', 'color', 'description', 'location']
   success_url= '/rats/'
 
 class RatUpdate(UpdateView):
@@ -50,3 +55,12 @@ class TraitList(ListView):
 
 class TraitDetail(DetailView):
   model = Trait
+
+class TraitUpdate(UpdateView):
+  model = Trait
+  fields = ['name', 'color']
+
+class TraitDelete(DeleteView):
+  model = Trait
+  success_url = '/traits/'
+

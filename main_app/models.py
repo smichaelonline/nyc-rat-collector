@@ -8,12 +8,22 @@ MEALS = (
   ('D', 'Dinner')
 )
 
-# Create your models here.
+class Trait(models.Model):
+  name = models.CharField(max_length=50)
+  color = models.CharField(max_length=20)
+
+  def __str__(self):
+    return self.name
+
+  def get_absolute_url(self):
+    return reverse('traits_detail', kwargs={'pk': self.id})
+
 class Rat(models.Model):
   name = models.CharField(max_length=100)
   color= models.CharField(max_length=100)
   description = models.TextField(max_length=250)
   location = models.CharField(max_length=150)
+  traits = models.ManyToManyField(Trait)
 
   def fed_for_today(self):
     return self.feeding_set.filter(date=date.today()).count() >= len(MEALS)
@@ -38,13 +48,3 @@ class Feeding(models.Model):
 
   class Meta:
     ordering = ['-date']
-
-class Trait(models.Model):
-  name = models.CharField(max_length=50)
-  color = models.CharField(max_length=20)
-
-  def __str__(self):
-    return self.name
-
-  def get_absolute_url(self):
-    return reverse('traits_detail', kwargs={'pk': self.id})

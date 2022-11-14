@@ -1,5 +1,12 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
+
+MEALS = (
+  ('B', 'Breakfast'),
+  ('L', 'Lunch'),
+  ('D', 'Dinner')
+)
 
 # Create your models here.
 class Rat(models.Model):
@@ -7,6 +14,9 @@ class Rat(models.Model):
   color= models.CharField(max_length=100)
   description = models.TextField(max_length=250)
   location = models.CharField(max_length=150)
+
+  def fed_for_today(self):
+    return self.feeding_set.filter(date=date.today()).count() >= len(MEALS)
 
   def __str__(self):
     return self.name
@@ -16,9 +26,15 @@ class Rat(models.Model):
 
 class Feeding(models.Model):
   date = models.DateField('Feeding date')
-  meal = models.CharField(max_length=40)
+  meal = models.CharField(
+    max_length=1,
+    choices=MEALS,
+    default=MEALS[0][0])
 
   rat = models.ForeignKey(Rat, on_delete=models.CASCADE)
 
   def __str__(self):
     return f"{self.get_meal_display()} on {self.date}"
+
+  class Meta:
+    ordering = ['-date']

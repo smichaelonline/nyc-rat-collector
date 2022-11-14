@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Rat 
 from .forms import FeedingForm
@@ -19,6 +19,14 @@ def rats_detail(request, rat_id):
   feeding_form=FeedingForm()
   return render(request, 'rats/detail.html', {'rat': rat, 'feeding_form': feeding_form}) 
 
+def add_feeding(request, rat_id):
+  form = FeedingForm(request.POST)
+  if form.is_valid():
+    new_feeding = form.save(commit=False)
+    new_feeding.rat_id = rat_id 
+    new_feeding.save() 
+  return redirect('rats_detail', rat_id=rat_id)
+
 class RatCreate(CreateView):
   model = Rat 
   fields = '__all__'
@@ -31,3 +39,4 @@ class RatUpdate(UpdateView):
 class RatDelete(DeleteView):
   model = Rat
   success_url= '/rats/'
+

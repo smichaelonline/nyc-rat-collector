@@ -8,5 +8,6 @@ urlpatterns = [
   path('rats/<int:rat_id>/', views.rats_detail, name='rats_detail'),
   path('rats/create/', views.RatCreate.as_view(), name='rats_create'),
   path('rats/<int:pk>/update/', views.RatUpdate.as_view(), name='rats_update'),
-  path('rats/<int:pk>/delete/', views.RatDelete.as_view(), name='rats_delete')
+  path('rats/<int:pk>/delete/', views.RatDelete.as_view(), name='rats_delete'),
+  path('rats/<int:rat_id>/add_feeding/', views.add_feeding,name='add_feeding'),
 ]

@@ -12,7 +12,20 @@
     src="{% static 'images/NYC-Rat-collector-logo.png' %}" 
     alt="Text reads: NYC Rat Collector"
   />
-  <p>funny statement placeholder</p>
+  <p>The rats are taking over.</p>
 </section>
+
+{% if not user.is_authenticated %}
+  <section>
+    <form action="{% url 'home' %}" method="post" class="login">
+      <h1>Login</h1>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="hidden" name="next" value="{{ next }}">
+      <button type="submit" class="btn submit">Login</button>
+    </form>
+  </section>
+{% endif %}
+
 
 {% endblock %}
